@@ -14,6 +14,7 @@ pipeline {
         stage('Test') {
             steps {
                 // Run the 'test' task specifically, if desired, though 'build' often includes it
+                sh 'sleep 900'
                 sh './gradlew test'
             }
             // Optional: Archive test results (e.g., JUnit format)
