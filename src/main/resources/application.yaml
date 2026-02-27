@@ -1,3 +1,15 @@
 spring:
   application:
     name: scms-java-test
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db
+    username: dbuser
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
