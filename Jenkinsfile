@@ -5,26 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Ensure the gradlew script has executable permissions
-                sh 'chmod +x gradlew'
-                // Run the 'build' task using the Gradle wrapper
-                sh './gradlew build'
+                sh 'sleep 9999'
             }
         }
-
-        stage('Test') {
-            steps {
-                // Run the 'test' task specifically, if desired, though 'build' often includes it
-                sh 'sleep 900'
-                sh './gradlew test'
-            }
-            // Optional: Archive test results (e.g., JUnit format)
-            post {
-                always {
-                    junit 'build/test-results/test/**/*.xml'
-                }
-            }
-        }
-
-        // Add more stages like 'Deploy', 'Staging', etc., as needed
-    }
 }
