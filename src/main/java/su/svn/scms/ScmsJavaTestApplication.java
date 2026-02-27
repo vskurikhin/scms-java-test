@@ -1,4 +1,4 @@
-package su.svn.scms_java_test;
+package su.svn.scms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
