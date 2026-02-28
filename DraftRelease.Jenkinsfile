@@ -8,10 +8,10 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'env'
-//                 // Ensure the gradlew script has executable permissions
-//                 sh 'chmod +x gradlew'
-//                 // Run the 'build' task using the Gradle wrapper
-//                 sh './gradlew build -x test'
+                // Ensure the gradlew script has executable permissions
+                sh 'chmod +x gradlew'
+                // Run the 'build' task using the Gradle wrapper
+                sh './gradlew build -x test'
             }
         }
 
@@ -24,6 +24,8 @@ pipeline {
                 sh 'cat VERSION'
                 sh "sed -i \"s/ //g;s/'//g\" VERSION"
                 sh 'cat VERSION'
+                sh 'gh release create --draft "$(cat VERSION)" --title "$(cat VERSION)" --notes "Jenkins Multiple SCMs project for Spring Boot"'
+                sh 'gh release upload "$(cat VERSION)" ./build/libs/scms-java-test-$(cat VERSION).jar'
             }
             // Optional: Archive test results (e.g., JUnit format)
             post {
