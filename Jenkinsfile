@@ -19,7 +19,8 @@ pipeline {
             steps {
                 // Run the 'test' task specifically, if desired, though 'build' often includes it
                 sh './gradlew test'
-                sh 'sleep 900'
+                sh 'gh release list'
+                sh 'sleep 60'
             }
             // Optional: Archive test results (e.g., JUnit format)
             post {
