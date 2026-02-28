@@ -1,6 +1,7 @@
 pipeline {
     agent any // Runs the pipeline on any available agent/node
     environment {
+        GH_LOGIN = credentials('GH_LOGIN')
         GH_TOKEN = credentials('GH_TOKEN')
     }
 
@@ -24,6 +25,7 @@ pipeline {
                 sh "sed -i \"s/ //g;s/'//g\" VERSION"
                 sh 'echo -n "VERSION: " ; cat VERSION'
                 sh 'git tag "$(cat VERSION)"'
+                sh 'git config --local user.name ${GH_LOGIN}'
                 sh 'git push origin "$(cat VERSION)"'
                 sh 'gh release create --draft "$(cat VERSION)" --title "$(cat VERSION)" --notes "Jenkins Multiple SCMs project for Spring Boot"'
                 sh 'gh release upload "$(cat VERSION)" ./build/libs/scms-java-test-$(cat VERSION).jar'
