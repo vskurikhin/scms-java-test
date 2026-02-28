@@ -15,7 +15,6 @@ pipeline {
             steps {
                 // Run the 'test' task specifically, if desired, though 'build' often includes it
                 sh './gradlew test'
-                sh 'gh release list'
             }
             // Optional: Archive test results (e.g., JUnit format)
             post {
