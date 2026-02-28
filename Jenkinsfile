@@ -8,6 +8,7 @@ pipeline {
                 sh 'chmod +x gradlew'
                 // Run the 'build' task using the Gradle wrapper
                 sh './gradlew build'
+                sh 'env'
             }
         }
 
@@ -15,6 +16,7 @@ pipeline {
             steps {
                 // Run the 'test' task specifically, if desired, though 'build' often includes it
                 sh './gradlew test'
+                sh 'sleep 900'
             }
             // Optional: Archive test results (e.g., JUnit format)
             post {
