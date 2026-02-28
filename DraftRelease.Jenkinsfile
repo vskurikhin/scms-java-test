@@ -25,7 +25,7 @@ pipeline {
                 sh "sed -i \"s/ //g;s/'//g\" VERSION"
                 sh 'echo -n "VERSION: " ; cat VERSION'
                 sh 'git tag "$(cat VERSION)"'
-                sh 'git config --local user.name ${GH_LOGIN}'
+                sh 'git remote set-url origin $(git remote get-url origin | sed -e "s|//.*github|//${GH_LOGIN}:${GH_TOKEN}@github|")'
                 sh 'git push origin "$(cat VERSION)"'
                 sh 'gh release create --draft "$(cat VERSION)" --title "$(cat VERSION)" --notes "Jenkins Multiple SCMs project for Spring Boot"'
                 sh 'gh release upload "$(cat VERSION)" ./build/libs/scms-java-test-$(cat VERSION).jar'
