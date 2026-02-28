@@ -1,14 +1,17 @@
 pipeline {
     agent any // Runs the pipeline on any available agent/node
+    environment {
+        GH_TOKEN = credentials('GH_TOKEN')
+    }
 
     stages {
         stage('Build') {
             steps {
+                sh 'env'
                 // Ensure the gradlew script has executable permissions
                 sh 'chmod +x gradlew'
                 // Run the 'build' task using the Gradle wrapper
                 sh './gradlew build'
-                sh 'env'
             }
         }
 
