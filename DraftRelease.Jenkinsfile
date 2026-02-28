@@ -20,7 +20,7 @@ pipeline {
                 // Run the 'test' task specifically, if desired, though 'build' often includes it
                 sh './gradlew test'
                 sh 'gh release list'
-                sh "awk -F '=' '$1~/^version/{print$2}' build.gradle > VERSION"
+                sh "awk -F '=' '\$1~/^version/{print\$2}' build.gradle > VERSION"
                 sh 'cat VERSION'
                 sh "sed -i 's/ //g' VERSION"
                 sh 'cat VERSION'
