@@ -40,7 +40,7 @@ pipeline {
         stage('SetTag') {
             steps {
                 sh 'git tag "$(cat VERSION)"'
-                sh 'git remote set-url origin $(git remote get-url origin | sed -e "s|//.*github\.com|//${GH_LOGIN}:${GH_TOKEN}@github.com|")'
+                sh 'git remote set-url origin $(git remote get-url origin | sed -e "s|//.*github\\.com|//${GH_LOGIN}:${GH_TOKEN}@github.com|")'
                 sh 'git push origin "$(cat VERSION)"'
             }
         }
