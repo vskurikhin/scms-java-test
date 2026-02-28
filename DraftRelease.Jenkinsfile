@@ -21,9 +21,10 @@ pipeline {
                 sh './gradlew test'
                 sh 'gh release list'
                 sh "awk -F '=' '\$1~/^version/{print\$2}' build.gradle > VERSION"
-                sh 'cat VERSION'
                 sh "sed -i \"s/ //g;s/'//g\" VERSION"
-                sh 'cat VERSION'
+                sh 'echo -n "VERSION: " ; cat VERSION'
+                sh 'git tag "$(cat VERSION)"'
+                sh 'git push origin "$(cat VERSION)"'
                 sh 'gh release create --draft "$(cat VERSION)" --title "$(cat VERSION)" --notes "Jenkins Multiple SCMs project for Spring Boot"'
                 sh 'gh release upload "$(cat VERSION)" ./build/libs/scms-java-test-$(cat VERSION).jar'
             }
