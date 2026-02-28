@@ -7,7 +7,7 @@ pipeline {
                 // Ensure the gradlew script has executable permissions
                 sh 'chmod +x gradlew'
                 // Run the 'build' task using the Gradle wrapper
-                sh './gradlew build'
+                sh './gradlew build -x test'
             }
         }
 
@@ -15,6 +15,7 @@ pipeline {
             steps {
                 // Run the 'test' task specifically, if desired, though 'build' often includes it
                 sh './gradlew test'
+                sh 'gh release list'
             }
             // Optional: Archive test results (e.g., JUnit format)
             post {
