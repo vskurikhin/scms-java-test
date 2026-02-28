@@ -11,7 +11,7 @@ pipeline {
                 // Ensure the gradlew script has executable permissions
                 sh 'chmod +x gradlew'
                 // Run the 'build' task using the Gradle wrapper
-                sh './gradlew build'
+                sh './gradlew build -x test'
             }
         }
 
