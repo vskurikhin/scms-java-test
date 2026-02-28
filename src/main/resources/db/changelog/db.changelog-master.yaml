@@ -1,3 +1,4 @@
 databaseChangeLog:
   - include:
-      file: classpath:schema.sql
+      file: schema.sql
+      relativeToChangelogFile: true
